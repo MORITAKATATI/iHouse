@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Account Update</h2>
+
+<div class="col-4">
+    <form method="post" action="~/Seller/Update">
+        <dl>
+            <dt>User ID *</dt>
+            <dd><input type="text" name="Id" /></dd>
+
+            <dt>User Name *</dt>
+            <dd><input type="text" name="UserName" /></dd>
+
+            <dt>First Name *</dt>
+            <dd><input type="text" name="FirstName" /></dd>
+
+            <dt>Last Name *</dt>
+            <dd><input type="text" name="LastName" /></dd>
+
+            <dt>Email address *</dt>
+            <dd><input type="text" name="Email" /></dd>
+
+            <dt>Phone number (option)</dt>
+            <dd><input type="text" name="Phone" /></dd>
+
+            <dt>Address (option)</dt>
+            <dd><input type="text" name="Address" /></dd>
+
+            <dd>&nbsp;</dd>
+
+            <dt><input type="reset" /></dt>
+            <dd><input type="submit" /></dd>
+        </dl>
+    </form>
+</div>

@@ -3,5 +3,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Seller</h2>
+@Html.ActionLink("Register", "Register","Seller")<br />
+@Html.ActionLink("Update your account", "Update", "Seller")<br />
+@Html.ActionLink("Delete your account", "Delete", "Seller")
+<table class="table">
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Email Address</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+        </tr>
+    }
+</table>
 
