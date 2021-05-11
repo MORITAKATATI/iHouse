@@ -14,18 +14,18 @@ namespace iHouse.Models
     
     public partial class House
     {
-        public int Id { get; set; }
-        public int Seller { get; set; }
+        public int HouseId { get; set; }
+        public int SellerId { get; set; }
         public string Region { get; set; }
         public string Suburb { get; set; }
         public string Location { get; set; }
-        public Nullable<int> Room { get; set; }
+        public int Room { get; set; }
         public string Type { get; set; }
-        public Nullable<decimal> FloorArea { get; set; }
-        public Nullable<decimal> LandArea { get; set; }
-        public Nullable<decimal> RV { get; set; }
+        public decimal FloorArea { get; set; }
+        public decimal LandArea { get; set; }
+        public decimal RV { get; set; }
         public string Email { get; set; }
     
-        public virtual Seller Seller1 { get; set; }
+        public virtual Seller Seller { get; set; }
     }
 }

@@ -9,14 +9,14 @@
 @Html.ActionLink("Delete your account", "Delete", "Seller")
 <table class="table">
     <tr>
-        <th>User ID</th>
+        <th>Seller ID</th>
         <th>User Name</th>
         <th>Email Address</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Id</td>
+            <td>@item.SellerId</td>
             <td>@item.UserName</td>
             <td>@item.Email</td>
         </tr>

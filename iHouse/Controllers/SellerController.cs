@@ -6,12 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using iHouse.Models;
 
-
 namespace iHouse.Controllers
 {
     public class SellerController : Controller
     {
-        // GET: Index
+        // GET: Seller/Index
         public ActionResult Index()
         {
             iHouseEntities entities = new iHouseEntities();
@@ -19,13 +18,13 @@ namespace iHouse.Controllers
 
         }
 
-        // GET: Register
+        // GET: Seller/Register
         public ActionResult Register()
         {
             return View();
         }
 
-        // POST: Register
+        // POST: Seller/Register
         [HttpPost]
         public ActionResult Register(Seller seller)
         {
@@ -34,7 +33,7 @@ namespace iHouse.Controllers
                 iHouseEntities entities = new iHouseEntities();
                 entities.Sellers.Add(seller);
                 entities.SaveChanges();
-                return RedirectToAction("Registered");
+                return RedirectToAction("RegisterSucceeded");
             }
             catch
             {
@@ -42,32 +41,41 @@ namespace iHouse.Controllers
             }
         }
 
-        // GET: Register succeed 
-        public ActionResult Registered()
+        // GET: Seller/RegisterSucceeded 
+        public ActionResult RegisterSucceeded()
         {
             return View();
 
         }
 
-        // GET: Register failed 
+        // GET: Seller/RegisterFailed 
         public ActionResult RegisterFailed()
         {
             return View();
 
         }
 
-        // GET: Update
+        //GET: Seller/Detail
+        public ActionResult Detail(int SellerId)
+        {
+            iHouseEntities entities = new iHouseEntities();
+            return View(entities.Sellers.Where(x => x.SellerId == SellerId).FirstOrDefault());
+
+        }
+
+        // GET: Seller/Update 
         public ActionResult Update()
         {
             return View();
 
         }
+
+        //POST: Seller/Update
         [HttpPost]
-       
-        public string Update(int Id, string UserName, string FirstName, string LastName, string Email, string Phone, string Address)
+        public string Update(int SellerId, string UserName, string FirstName, string LastName, string Email, string Phone, string Address)
         {
             iHouseEntities entities = new iHouseEntities();
-            var item = entities.Sellers.Find(Id);
+            var item = entities.Sellers.Find(SellerId);
             item.UserName = UserName;
             item.FirstName = FirstName;
             item.LastName = LastName;
@@ -75,31 +83,32 @@ namespace iHouse.Controllers
             item.Phone = Phone;
             item.Address = Address;
             entities.SaveChanges();
-            return "Updated";
+            return "Your account is updated";
 
         }
 
-        // GET: Updated
+        // GET: Seller/Updated
         public ActionResult Updated()
         {
             return View();
 
         }
 
-        //GET: Delete
+        //GET: Seller/Delete
         public ActionResult Delete()
         {
             return View();
 
         }
+        //POST: Seller/Delete
         [HttpPost]
-        public string Delete(int Id)
+        public string Delete(int SellerId)
         {
             iHouseEntities entities = new iHouseEntities();
-            Seller item = entities.Sellers.Find(Id);
+            Seller item = entities.Sellers.Find(SellerId);
             entities.Sellers.Remove(item);
             entities.SaveChanges();
-            return "Deleted";
+            return "Your account is deleted";
         }
     }
 }

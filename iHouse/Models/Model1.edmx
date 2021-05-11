@@ -7,25 +7,25 @@
     <Schema Namespace="iHouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="House">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="HouseId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Seller" Type="int" Nullable="false" />
-          <Property Name="Region" Type="nvarchar" MaxLength="50" />
-          <Property Name="Suburb" Type="nvarchar" MaxLength="50" />
-          <Property Name="Location" Type="nvarchar" MaxLength="255" />
-          <Property Name="Room" Type="int" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="FloorArea" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="LandArea" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="RV" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="HouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SellerId" Type="int" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Suburb" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Room" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FloorArea" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LandArea" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RV" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="SellerId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SellerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -35,13 +35,13 @@
         </EntityType>
         <Association Name="FK_House_Seller">
           <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
-          <End Role="House" Type="Self.House" Multiplicity="0..1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seller">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="SellerId" />
             </Principal>
             <Dependent Role="House">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="SellerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -59,54 +59,54 @@
       <Schema Namespace="iHouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="House">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="HouseId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Seller" Type="Int32" Nullable="false" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Room" Type="Int32" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FloorArea" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="LandArea" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="RV" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Seller1" Relationship="Self.FK_House_Seller" FromRole="House" ToRole="Seller" />
+          <Property Name="HouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Room" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FloorArea" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LandArea" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RV" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Seller" Relationship="iHouseModel.FK_House_Seller" FromRole="House" ToRole="Seller" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="SellerId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="House" Relationship="Self.FK_House_Seller" FromRole="Seller" ToRole="House" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_House_Seller">
-          <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
-          <End Role="House" Type="Self.House" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Seller">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="House">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          <NavigationProperty Name="Houses" Relationship="iHouseModel.FK_House_Seller" FromRole="Seller" ToRole="House" />
+          </EntityType>
         <EntityContainer Name="iHouseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Houses" EntityType="Self.House" />
           <EntitySet Name="Sellers" EntityType="Self.Seller" />
-          <AssociationSet Name="FK_House_Seller" Association="Self.FK_House_Seller">
+          <AssociationSet Name="FK_House_Seller" Association="iHouseModel.FK_House_Seller">
             <End Role="Seller" EntitySet="Sellers" />
             <End Role="House" EntitySet="Houses" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_House_Seller">
+          <End Type="iHouseModel.Seller" Role="Seller" Multiplicity="1" />
+          <End Type="iHouseModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="SellerId" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -116,8 +116,8 @@
           <EntitySetMapping Name="Houses">
             <EntityTypeMapping TypeName="iHouseModel.House">
               <MappingFragment StoreEntitySet="House">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Seller" ColumnName="Seller" />
+                <ScalarProperty Name="HouseId" ColumnName="HouseId" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
                 <ScalarProperty Name="Region" ColumnName="Region" />
                 <ScalarProperty Name="Suburb" ColumnName="Suburb" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
@@ -133,8 +133,8 @@
           <EntitySetMapping Name="Sellers">
             <EntityTypeMapping TypeName="iHouseModel.Seller">
               <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
                 <ScalarProperty Name="UserName" ColumnName="Username" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
