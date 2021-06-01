@@ -11,7 +11,8 @@ namespace iHouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Seller
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +20,32 @@ namespace iHouse.Models
         {
             this.Houses = new HashSet<House>();
         }
-    
+
         public int SellerId { get; set; }
+
+        [Required(ErrorMessage = "Please enter a user name")]
+        [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "User name format is not valid")]
         public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your first name")]
+        [RegularExpression(@"^[A-Za-z]*$", ErrorMessage = "First name format is not valid")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name")]
+        [RegularExpression(@"^[A-Za-z]*$", ErrorMessage = "Last name format is not valid")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your address")]
         public string Address { get; set; }
+
+        [Required(ErrorMessage = "Please enter your phone number")]
+        [Phone(ErrorMessage = "Phone number is not valid")]
         public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Please enter your email address")]
+        [RegularExpression(@"^[A-Za-z0-9]+@[A-Za-z0-9]+(\.[A-Za-z]+)*$", ErrorMessage = "Email is not valid")]
         public string Email { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<House> Houses { get; set; }
     }

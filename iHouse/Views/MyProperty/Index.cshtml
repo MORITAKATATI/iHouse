@@ -1,0 +1,29 @@
+﻿@model iHouse.Models.Seller
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Seller ckeck in</h2>
+<hr />
+
+@using (Html.BeginForm("Checkin", "MyProperty", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <dl>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <dt>Seller ID *</dt>
+        <dd>@Html.TextBoxFor(Model => Model.SellerId) </dd>
+
+        <dt>Email address *</dt>
+        <dd>@Html.TextBoxFor(Model => Model.Email) </dd>
+
+        <dd style="color:red">@TempData["CheckinFailed"]</dd>
+
+        <dt>&nbsp;</dt>
+        <dd><input class="submit" type="submit" value="Checkin"/></dd>
+
+    </dl>
+}
+Have not registered yet, @Html.ActionLink("Register Now", "Index", "Seller")

@@ -1,0 +1,57 @@
+﻿@model iHouse.Models.House
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Property Update</h2>
+
+
+@using (Html.BeginForm("Update", "MyProperty", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.HouseId)
+        @Html.HiddenFor(model => model.SellerId)
+
+        <dl>
+            <dt>@Html.LabelFor(model => model.Region) *</dt>
+            <dd>@Html.EditorFor(model => model.Region) @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.Suburb) *</dt>
+            <dd>@Html.EditorFor(model => model.Suburb) @Html.ValidationMessageFor(model => model.Suburb, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.Location) *</dt>
+            <dd>@Html.EditorFor(model => model.Location) @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.Type) *</dt>
+            <dd>@Html.EditorFor(model => model.Type) @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.Room) *</dt>
+            <dd>@Html.EditorFor(model => model.Room) @Html.ValidationMessageFor(model => model.Room, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.FloorArea) *</dt>
+            <dd>@Html.EditorFor(model => model.FloorArea) @Html.ValidationMessageFor(model => model.FloorArea, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.LandArea) *</dt>
+            <dd>@Html.EditorFor(model => model.LandArea) @Html.ValidationMessageFor(model => model.LandArea, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.RV) *</dt>
+            <dd>@Html.EditorFor(model => model.RV) @Html.ValidationMessageFor(model => model.RV, "", new { @class = "text-danger" })</dd>
+
+            <dt>@Html.LabelFor(model => model.Email, "Contact Email") *</dt>
+            <dd>@Html.EditorFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</dd>
+
+            <dt>&nbsp;</dt>
+            <dd><input class="reset" type="reset" /><span>&nbsp;&nbsp;</span><input class="submit" type="submit" /></dd>
+        </dl>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to My Page", "Me", "MyProperty", new { SellerId = Model.SellerId }, null)
+</div>

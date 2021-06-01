@@ -1,25 +1,35 @@
-﻿
+﻿@model iHouse.Models.Seller
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Register";
 }
 
-<h2>Seller</h2>
-@Html.ActionLink("Register", "Register","Seller")<br />
-@Html.ActionLink("Update your account", "Update", "Seller")<br />
-@Html.ActionLink("Delete your account", "Delete", "Seller")
-<table class="table">
-    <tr>
-        <th>Seller ID</th>
-        <th>User Name</th>
-        <th>Email Address</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.SellerId</td>
-            <td>@item.UserName</td>
-            <td>@item.Email</td>
-        </tr>
-    }
-</table>
+<h2>Seller registration</h2>
+<hr />
+@using (Html.BeginForm("Register", "Seller", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <dl>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <dt>User Name *</dt>
+        <dd>@Html.EditorFor(Model => Model.UserName) @Html.ValidationMessageFor(Model => Model.UserName, "", new { @class = "text-danger" })</dd>
 
+        <dt>First Name *</dt>
+        <dd>@Html.EditorFor(Model => Model.FirstName) @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "text-danger" })</dd>
+
+        <dt>Last Name *</dt>
+        <dd>@Html.EditorFor(Model => Model.LastName) @Html.ValidationMessageFor(Model => Model.LastName, "", new { @class = "text-danger" })</dd>
+
+        <dt>Email address *</dt>
+        <dd>@Html.EditorFor(Model => Model.Email) @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })</dd>
+
+        <dt>Phone number *</dt>
+        <dd>@Html.EditorFor(Model => Model.Phone) @Html.ValidationMessageFor(Model => Model.Phone, "", new { @class = "text-danger" })</dd>
+
+        <dt>Address *</dt>
+        <dd>@Html.EditorFor(Model => Model.Address) @Html.ValidationMessageFor(Model => Model.Address, "", new { @class = "text-danger" })</dd>
+
+        <dt>&nbsp;</dt>
+        <dd><input class="reset" type="reset" /><span>&nbsp;&nbsp;</span><input class="submit" type="submit" /></dd>
+    </dl>
+}
+If you have already registered, @Html.ActionLink("Check in", "Index", "MyProperty") to manage your properties

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using iHouse.Models;
@@ -10,105 +11,84 @@ namespace iHouse.Controllers
 {
     public class SellerController : Controller
     {
+        private iHouseEntities entities = new iHouseEntities();
         // GET: Seller/Index
         public ActionResult Index()
         {
-            iHouseEntities entities = new iHouseEntities();
-            return View(entities.Sellers.ToList());
-
-        }
-
-        // GET: Seller/Register
-        public ActionResult Register()
-        {
+            
             return View();
+
         }
+      
 
         // POST: Seller/Register
         [HttpPost]
         public ActionResult Register(Seller seller)
         {
-            try
+            if (ModelState.IsValid)
             {
-                iHouseEntities entities = new iHouseEntities();
-                entities.Sellers.Add(seller);
-                entities.SaveChanges();
-                return RedirectToAction("RegisterSucceeded");
+                try
+                {
+                    
+                    entities.Sellers.Add(seller);
+                    entities.SaveChanges();
+
+                    //Success acknowledge message
+                    TempData["SuccessMsg"] = "Successfully registered";
+
+                    return RedirectToAction("Me", "MyProperty", new { SellerId = seller.SellerId});
+                }
+                catch
+                {
+                    return View("Index");
+                }
+
             }
-            catch
+            return View("Index");
+        }
+
+
+        // GET: Seller/Update/SellerId=5
+        public ActionResult Update(int? SellerId)
+        {
+            if (SellerId == null)
             {
-                return RedirectToAction("RegisterFailed");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-        }
-
-        // GET: Seller/RegisterSucceeded 
-        public ActionResult RegisterSucceeded()
-        {
-            return View();
-
-        }
-
-        // GET: Seller/RegisterFailed 
-        public ActionResult RegisterFailed()
-        {
-            return View();
+            Seller seller = entities.Sellers.Find(SellerId);
+            if (seller == null)
+            {
+                return HttpNotFound();
+            }
+            return View(seller);
 
         }
 
-        //GET: Seller/Detail
-        public ActionResult Detail(int SellerId)
-        {
-            iHouseEntities entities = new iHouseEntities();
-            return View(entities.Sellers.Where(x => x.SellerId == SellerId).FirstOrDefault());
-
-        }
-
-        // GET: Seller/Update 
-        public ActionResult Update()
-        {
-            return View();
-
-        }
-
-        //POST: Seller/Update
+        //POST: Seller/Update/SellerId=5
         [HttpPost]
-        public string Update(int SellerId, string UserName, string FirstName, string LastName, string Email, string Phone, string Address)
+        public ActionResult Update(int? SellerId, Seller seller)
         {
-            iHouseEntities entities = new iHouseEntities();
-            var item = entities.Sellers.Find(SellerId);
-            item.UserName = UserName;
-            item.FirstName = FirstName;
-            item.LastName = LastName;
-            item.Email = Email;
-            item.Phone = Phone;
-            item.Address = Address;
-            entities.SaveChanges();
-            return "Your account is updated";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    
+                    entities.Entry(seller).State = EntityState.Modified;
+                    entities.SaveChanges();
 
-        }
+                    //acknowledge message
+                    TempData["SuccessMsg"] = "Your information has been successfully updated";
 
-        // GET: Seller/Updated
-        public ActionResult Updated()
-        {
+                    return RedirectToAction("Me", "MyProperty", new { SellerId = seller.SellerId});
+                }
+                catch
+                {
+                    return View();
+                }
+            }
             return View();
 
         }
 
-        //GET: Seller/Delete
-        public ActionResult Delete()
-        {
-            return View();
-
-        }
-        //POST: Seller/Delete
-        [HttpPost]
-        public string Delete(int SellerId)
-        {
-            iHouseEntities entities = new iHouseEntities();
-            Seller item = entities.Sellers.Find(SellerId);
-            entities.Sellers.Remove(item);
-            entities.SaveChanges();
-            return "Your account is deleted";
-        }
     }
 }

@@ -1,54 +1,51 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 <h2>Property</h2>
-@Html.ActionLink("List a property", "Add", "Property")<br />
-@Html.ActionLink("Update my property", "Update", "Property")<br />
-@Html.ActionLink("Delete a property", "Delete", "Property")
+<hr />
+<input class="link" type="button" value="List a Property" onclick="location.href = '@Url.Action("Index", "MyProperty")'" />
+<input class="link" type="button" value="Manage My Property" onclick="location.href = '@Url.Action("Index", "MyProperty")'" />
+<br />
+<br />
+
 <div>
-    <form method="post" action="~/Property/Search">
+    <form method="post" action="~/Property/SearchResult">
         <table>
             <tr>
                 <th>Region</th>
                 <th>Suburb</th>
-                <th>Type</th>
-                <th></th>
+                <th>Property Type</th>
             </tr>
             <tr>
                 <td><input type="text" name="Region" /></td>
                 <td><input type="text" name="Suburb" /></td>
                 <td><input type="text" name="Type" /></td>
-                <td><input type="submit" value="Search" /></td>
+                <td><input class="submit" type="submit" value="Search" /></td>
             </tr>
         </table>
     </form>
 </div>
+<br />
 <table class="table">
-    <tr>
-        <th>Region</th>
-        <th>Suburb</th>
-        <th>Location</th>
-        <th>Property Type</th>
-        <th>Number of Rooms</th>
-        <th>Floor Area</th>
-        <th>Land Area</th>
-        <th>RV</th>
-        <th>Email</th>
-    </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Region</td>
-            <td>@item.Suburb</td>
-            <td>@item.Location</td>
-            <td>@item.Type</td>
-            <td>@item.Room</td>
-            <td>@item.FloorArea</td>
-            <td>@item.LandArea</td>
-            <td>@item.RV</td>
-            <td>@item.Email</td>
+            <td>
+                <h4>
+                    @item.Type <span>type </span>@item.Room <span>rooms</span><br />
+                </h4>
+                <h4>
+                    <span>Land: </span>@item.LandArea.ToString("n2") <span>m² (Floor: </span>@item.FloorArea.ToString("n2")<span> m² )</span>
+                </h4>
+                <h4><span>$</span>@item.RV.ToString("n2")</h4>
+            </td>
+            <td align="right" style="color:#aaaaaa">
+                <br />
+                @item.Suburb <span>-</span> @item.Region <br />
+                @item.Location<br />
+                <span style="color:#aaaaaa">@item.Email</span><br /><br />
+            </td>
         </tr>
     }
 </table>

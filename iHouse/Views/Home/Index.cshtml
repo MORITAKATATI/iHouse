@@ -3,11 +3,32 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Home</h2>
-@Html.ActionLink("Register", "Index", "Seller")<br />
-@Html.ActionLink("List a property", "Add", "Property")
-<P>iHouse is a very popular website providing millions of real-time house information</P>
-<div>
-    <img src="~/Content/Images/House 1.png" width="300"/>
-    <p>Find your ideal house here</p>
-</div>
+    <div style="text-align:center; padding:50px">
+        <h3>Sellers sell more, buyers spend less</h3>
+        <P>Millions of real-time house information</P>
+        <p>We've become one of New Zealand's most well known and respected property trading platforms. Our name has become synonymous with uncompromised quality and service, and our entire network is committed to the continuous improvement of the services we offer.</p>
+        <a href="@Url.Action("Index","Seller")"><img src="/Content/Images/Register.png" width="200"/></a>
+    </div>
+
+    <a href="@Url.Action("Index","Property")" style="display:block; height:300px; background:#fafafa; padding:20px">
+        <div style="width:50%; height:100%; background-image:url(/Content/Images/house2.jpg);  background-size:cover; background-position-y:center; float:left">
+
+        </div>
+
+        <div style="width:50%; height:100%; margin:auto; padding:100px; float:left">
+            <h4>Property Market</h4>
+            <p>Find the best and cheapest house</p>
+        </div>
+    </a>
+
+    <a href="@Url.Action("Index", "MyProperty")" style="display:block; height:300px; padding:20px">
+        <div style="width:50%; height:100%; text-align:right; margin:auto; padding:100px; float:left">
+            <h4>Sell your house</h4>
+            <p>Make your property more welcome</p>
+        </div>
+
+        <div style="width:50%; height:100%; float:left; background-image:url(/Content/Images/house1.jpg); background-size:cover;  background-position-y:center">
+
+        </div>
+    </a>
+

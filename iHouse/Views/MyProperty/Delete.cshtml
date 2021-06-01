@@ -1,0 +1,65 @@
+﻿@model iHouse.Models.House
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<hr />
+
+<h3>Are you sure you want to delete this property?</h3>
+
+<div>
+    <table>
+        <tr>
+            <td>house ID:</td>
+            <td>@Model.HouseId</td>
+        </tr>
+        <tr>
+            <td>Region:</td>
+            <td>@Model.Region</td>
+        </tr>
+        <tr>
+            <td>Suburb:</td>
+            <td>@Model.Suburb</td>
+        </tr>
+        <tr>
+            <td>Location:</td>
+            <td>@Model.Location</td>
+        </tr>
+        <tr>
+            <td>Property Type:</td>
+            <td>@Model.Type</td>
+        </tr>
+        <tr>
+            <td>Number of Rooms:</td>
+            <td>@Model.Room</td>
+        </tr>
+        <tr>
+            <td>Floor Area (m²):</td>
+            <td>@Model.FloorArea</td>
+        </tr>
+        <tr>
+            <td>Land Area (m²):</td>
+            <td>@Model.LandArea</td>
+        </tr>
+        <tr>
+            <td>RV ($):</td>
+            <td>@Model.RV</td>
+        </tr>
+        <tr>
+            <td>Contact email:</td>
+            <td>@Model.Email</td>
+        </tr>
+    </table>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <br />
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default submit" style="background:#ff0000" />
+            @Html.ActionLink("Cancel", "Me", "MyProperty", new { SellerId = Model.SellerId }, new { @style = "border:1px solid #ff0000; padding:6px; border-radius:4px; color:#ff0000" })
+        </div>
+    }
+</div>
