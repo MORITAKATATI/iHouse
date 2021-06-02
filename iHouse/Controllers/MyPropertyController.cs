@@ -40,7 +40,7 @@ namespace iHouse.Controllers
         }
 
         //POST: MyProperty/Me/5
-        public ActionResult Me(int? SellerId)
+        public ActionResult Me(int SellerId)
         {
             //Send seller inf to view
             Seller seller = entities.Sellers.Find(SellerId);
@@ -70,7 +70,7 @@ namespace iHouse.Controllers
 
         // Post: MyProperty/Add
         [HttpPost]
-        public ActionResult Add(House house, int SellerId)
+        public ActionResult Add(House house, int? SellerId)
         {
             if (ModelState.IsValid)
             {

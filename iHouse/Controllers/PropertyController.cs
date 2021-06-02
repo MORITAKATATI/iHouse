@@ -11,24 +11,32 @@ namespace iHouse.Controllers
     public class PropertyController : Controller
     {
         // GET: Property/Index
+        [HttpGet]
         public ActionResult Index()
         {
             iHouseEntities entities = new iHouseEntities();
-            return View(entities.Houses.OrderByDescending(x=>x.HouseId).ToList());
+            ViewBag.List = entities.Houses.OrderByDescending(x => x.HouseId).ToList();
+            return View();
         }
 
-
-        // POST: Property/Search
+        //Post: Property/Index
         [HttpPost]
-        public ActionResult SearchResult(string Region, string Suburb, string Type)
+        public ActionResult Index(string Region, string Suburb, string Type)
         {
+            if (Region == null && Suburb== null && Type == null)
+            {
+                TempData["SeachFailed"] = "Please input at least one search condition";
+                return View();
+            }
             iHouseEntities entities = new iHouseEntities();
             List<House> SearchResult = entities.Houses
                                         .Where(x => x.Region.Contains(Region) & x.Suburb.Contains(Suburb) & x.Type.Contains(Type))
-                                        .OrderByDescending(x=>x.HouseId)
+                                        .OrderByDescending(x => x.HouseId)
                                         .ToList();
-            return View(SearchResult);
-
+            ViewBag.List = SearchResult;
+            return View();
         }
+
+
     }
 }

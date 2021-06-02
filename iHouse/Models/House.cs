@@ -53,7 +53,7 @@ namespace iHouse.Models
         public decimal RV { get; set; }
 
         [Required(ErrorMessage = "Please input a contact email")]
-        [RegularExpression(@"^[A-Za-z0-9]+@[A-Za-z0-9]+(\.[A-Za-z]+)*$", ErrorMessage = "Email is not valid")]
+        [RegularExpression(@"^[A-Za-z0-9]+@[A-Za-z0-9]+(\.)+[A-Za-z0-9]{2,10}$", ErrorMessage = "Email is not valid")]
         public string Email { get; set; }
 
         public virtual Seller Seller { get; set; }

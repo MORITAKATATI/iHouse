@@ -43,7 +43,7 @@ namespace iHouse.Models
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please enter your email address")]
-        [RegularExpression(@"^[A-Za-z0-9]+@[A-Za-z0-9]+(\.[A-Za-z]+)*$", ErrorMessage = "Email is not valid")]
+        [RegularExpression(@"^[A-Za-z0-9]+@[A-Za-z0-9]+(\.)+[A-Za-z0-9]{2,10}$", ErrorMessage = "Email is not valid")]
         public string Email { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
